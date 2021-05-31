@@ -100,10 +100,10 @@ During runtime you can use the StatusBar.hide function below, but if you want th
 Add/edit these two attributes if not present. Set **"Status bar is initially hidden"** to **"YES"** and set **"View controller-based status bar appearance"** to **"NO"**. If you edit it manually without Xcode, the keys and values are:
 
 
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+    <key>UIStatusBarHidden</key>
+    <true/>
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
 
 
 Methods
@@ -305,7 +305,7 @@ StatusBar.isVisible
 Read this property to see if the statusbar is visible or not.
 
     if (StatusBar.isVisible) {
-    	// do something
+        // do something
     }
 
 
@@ -315,6 +315,27 @@ Supported Platforms
 - iOS
 - Android
 - Windows
+
+StatusBar.height
+=================
+
+Call this function to get the height of the statusbar.
+
+    StatusBar.height(onSuccess, onError);
+
+    const onSuccess = (height) => {
+        // do something with the statusbar height here
+    }
+
+    const onError = (error) => {
+        // handle error state; should usually not ever activate
+    }
+    
+Supported Platforms
+-------------------
+
+- iOS
+- Android
 
 statusTap
 =========
