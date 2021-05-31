@@ -150,7 +150,7 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
     } else {
         self.webView.scrollView.scrollsToTop = NO;
     }
- 
+    
     // blank scroll view to intercept status bar taps
     UIScrollView *fakeScrollView = [[UIScrollView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     fakeScrollView.delegate = self;
@@ -199,6 +199,14 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
     }
 }
 
+- (void) height:(CDVInvokedUrlCommand*)command
+{
+    double statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDouble:statusBarHeight];
+    [result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
 - (void) initializeStatusBarBackgroundView
 {
     CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
@@ -210,12 +218,12 @@ static const void *kStatusBarStyle = &kStatusBarStyle;
         // screen (statusBarFrame.origin.y will be somewhere around screen height). In this case we need to
         // correct frame's coordinates
         statusBarFrame.origin.y = 0;
-    }
+}
 
-    _statusBarBackgroundView = [[UIView alloc] initWithFrame:statusBarFrame];
-    _statusBarBackgroundView.backgroundColor = _statusBarBackgroundColor;
-    _statusBarBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
-    _statusBarBackgroundView.autoresizesSubviews = YES;
+_statusBarBackgroundView = [[UIView alloc] initWithFrame:statusBarFrame];
+_statusBarBackgroundView.backgroundColor = _statusBarBackgroundColor;
+_statusBarBackgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth  | UIViewAutoresizingFlexibleBottomMargin);
+_statusBarBackgroundView.autoresizesSubviews = YES;
 }
 
 - (void) setStatusBarOverlaysWebView:(BOOL)statusBarOverlaysWebView
